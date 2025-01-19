@@ -39,15 +39,15 @@ class SpotifyClient:
             HOST_CONSTANTS_TEST_PATH if is_test else ".env"
         )
         host_constants_spec = {
-            "GATEKEEPIFY_CLIENT_ID": os.environ.get("GATEKEEPIFY_CLIENT_ID"),
-            "GATEKEEPIFY_CLIENT_SECRET": os.environ.get("GATEKEEPIFY_CLIENT_SECRET"),
+            "SPOTIPY_CLIENT_ID": os.environ.get("SPOTIPY_CLIENT_ID"),
+            "SPOTIPY_CLIENT_SECRET": os.environ.get("SPOTIPY_CLIENT_SECRET"),
         }
 
         # if all env vars are found, return them, otherwise prompt user
         if all(host_constants_spec.values()):
             return (
-                host_constants_spec["GATEKEEPIFY_CLIENT_ID"],
-                host_constants_spec["GATEKEEPIFY_CLIENT_SECRET"],
+                host_constants_spec["SPOTIPY_CLIENT_ID"],
+                host_constants_spec["SPOTIPY_CLIENT_SECRET"],
                 )
         else:
             print("[WARNING] Could not find credential(s) in environment. Check your .env file or build it below.")
@@ -57,11 +57,10 @@ class SpotifyClient:
                 "Please input your Spotify API client secret: "
             )
             f = open("../" + host_constants_path, "w")
-            f.write('GATEKEEPIFY_CLIENT_ID="' + client_id + '"\n')
-            f.write('GATEKEEPIFY_CLIENT_SECRET="' + client_secret + '"\n')
+            f.write('SPOTIPY_CLIENT_ID="' + client_id + '"\n')
+            f.write('SPOTIPY_CLIENT_SECRET="' + client_secret + '"\n')
             f.close()
             return (client_id, client_secret)
-
 
     def gen_current_user(self) -> User:
         res = self.client.current_user()
